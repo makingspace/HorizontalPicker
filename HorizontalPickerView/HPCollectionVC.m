@@ -122,10 +122,12 @@
     if (collectionView.contentOffset.x) {
         CGPoint point = collectionView.contentOffset;
         point.x += collectionView.frame.size.width / 2;
-        point.x  = MIN(collectionView.contentSize.width - .5f, point.x);
+        // modified min of point.x
+        point.x  = MIN(collectionView.contentSize.width - 1.0f, point.x);
         point.y += collectionView.frame.size.height / 2;
         index = [collectionView indexPathForItemAtPoint:point].row;
     }
+    
     return index;
 }
 

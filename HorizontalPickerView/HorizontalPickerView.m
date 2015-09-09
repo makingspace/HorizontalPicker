@@ -77,14 +77,19 @@ typedef NS_ENUM(NSUInteger, AdjustEdgeInset) {
     
     CGRect gradientRect = CGRectInset(self.bounds, kTopFrameXOffset, kTopFrameYOffset);
     
+    // adjust frame of collectionController view
+    CGRect adjustedViewFrame = self.collectionController.view.frame;
+    adjustedViewFrame.origin = CGPointMake(0, 0);
+    self.collectionController.view.frame = adjustedViewFrame;
+    
     if (_style == HPStyle_iOS7) {
         [self.layer addSublayer:self.shapeLayer];
-        [self addSubview:self.collectionController.collectionView];
+        [self addSubview:self.collectionController.view];
     }
     else {
         [self addSubview:[[HPWhiteGradientView alloc] initWithFrame:gradientRect]];
         [self addSubview:[[HPBlackGradientView alloc] initWithFrame:gradientRect]];
-        [self addSubview:self.collectionController.collectionView];
+        [self addSubview:self.collectionController.view];
         [self addSubview:self.topFrameView];
     }
 }
